@@ -3,7 +3,7 @@
         <h1>Семья</h1>
         Введите код приглашение
         <v-text-field
-        class="fieldInput"></v-text-field>
+        v-model="fieldInput"></v-text-field>
         <v-btn
         @click="postUser">Подтвердить</v-btn>
         <Navigation/>
@@ -11,8 +11,11 @@
   </template>
 
   <script setup>
+  import { ref } from 'vue'
   import Navigation from "/src/components/Navigation.vue"
-  import Axios from "axios";
+  import axios from "axios";
+
+  const fieldInput = ref();
 
   const postUser = async () => {
   try {
