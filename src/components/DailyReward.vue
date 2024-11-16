@@ -1,105 +1,111 @@
 <template>
     <div class="app-container">
-      <header class="app-header">
-        <h1 class="app-title">Дерево любви</h1>
-        <div class="app-header-cards">
-          <v-card class="money-card">
-            1 уровень
-          </v-card>
-          <v-card class="level-card">
-            5000 золота
-          </v-card>
+      <div class="daily-reward">
+    <div class="reward-container">
+      <div class="reward-title">Ежедневная награда</div>
+      <div class="rewards-grid">
+        <div
+          v-for="day in 12"
+          :key="day"
+          :class="['reward-box', { 'current': day === currentDay }]"
+        >
+          <div class="reward-day">День {{ day }}</div>
+          <div class="reward-amount">+{{ rewards[day-1] }}</div>
         </div>
-      </header>
-
-      <section class="app-content">
-        <div v-for="item in items" :key="item.id" class="card">
-          <h2 class="card-title">{{ item.name }}</h2>
-          <p class="card-description">{{ item.description }}</p>
-          <button class="card-button" @click="handleAction(item.id)">Подробнее</button>
-        </div>
-      </section>
-        <Navigation/>
+      </div>
+    </div>
+    <v-btn class="continue-button" :to="({ name: 'Main' })">Продолжить</v-btn>
+  </div>
     </div>
   </template>
 
   <script setup>
-  import Navigation from "/src/components/Navigation.vue"
+  import {ref} from 'vue';
 
+  const currentDay = ref(1)
+const rewards = ref([100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 1000])
 
   </script>
 
   <style scoped>
-  /* Основные стили для контейнера */
-  .app-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    height: 100vh;
-    padding: 10px;
-    max-width: 375px; /* Размер под мини-приложение Telegram */
-    margin: 0 auto;
-    background-color: #f9f9f9; /* Светлый фон */
-  }
+  .daily-reward {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
 
-  /* Стили для заголовка */
-  .app-header {
-    width: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-  }
+.reward-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  text-align: center;
+  margin-bottom: 20px;
+  width: 90%;
+  max-width: 800px;
+}
 
-  .app-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-  }
+.reward-title {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
 
-  /* Основная секция с карточками */
-  .app-content {
-    flex: 1;
-    width: 100%;
-  }
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2vh;
+}
 
-  .card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 15px;
-  }
+.reward-box {
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  padding: 1vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  height: 10vh;
+  width: 14vw;
+}
 
-  .card-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
+.reward-box.current {
+  background-color: #e3f2fd;
+  border: 2px solid #2196f3;
+  transform: scale(1.05);
+}
 
-  .card-description {
-    font-size: 0.9rem;
-    color: #555;
-    margin-bottom: 15px;
-  }
+.reward-day {
+  font-size: 2vh;
+  color: #666;
+}
 
-  .card-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9rem;
-  }
 
-  .card-button:hover {
-    background-color: #0056b3;
-  }
 
-  .app-header-cards{
-    display: flex;
-    justify-content: space-between;
-    padding: 2vw;
-  }
+.reward-amount {
+  font-size: 12px;
+  color: #4CAF50;
+  font-weight: bold;
+}
 
+.continue-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+.continue-button:hover {
+  background-color: #45a049;
+}
   </style>

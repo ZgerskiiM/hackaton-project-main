@@ -3,6 +3,9 @@ import Main from "/src/components/Main.vue";
 import Shop from "/src/components/Shop.vue";
 import Settings from "/src/components/Settings.vue";
 import TodoList from "/src/components/TodoList.vue";
+import DailyReward from "/src/components/DailyReward.vue";
+import Calendar from "/src/components/Calendar.vue"
+import Family from "/src/components/Family.vue";
 
 
 
@@ -27,6 +30,21 @@ export const router = createRouter({
       path: "/todolist",
       name: "TodoList",
       component: TodoList,
+    },
+    {
+      path: "/daily",
+      name: "Reward",
+      component: DailyReward,
+    },
+    {
+      path: "/calendar",
+      name: "Calendar",
+      component: Calendar,
+    },
+    {
+      path: "/family",
+      name: "Family",
+      component: Family,
     },
   ],
   history: createWebHistory(),

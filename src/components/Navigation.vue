@@ -6,35 +6,30 @@ const router = useRouter();
 
 <template>
   <v-layout
-    style="height: 56px; max-width:375px; "
+    style="height: 60px; max-width:375px; "
   >
     <v-bottom-navigation
-      color="black"
       active
     >
       <v-btn :to="({ name: 'TodoList' })">
         <v-icon>
-          mdi-home-heart
+          mdi-note-text-outline
         </v-icon>
-        Задачи
       </v-btn>
       <v-btn :to="({ name: 'Main' })">
         <v-icon>
-          mdi-home-heart
+          mdi-tree-outline
         </v-icon>
-        Главная
       </v-btn>
-      <v-btn :to="({ name: 'TodoList' })">
+      <v-btn :to="({ name: 'Calendar' })">
         <v-icon>
-          mdi-home-heart
+          mdi-calendar-heart
         </v-icon>
-        TodoList
       </v-btn>
       <v-btn :to="({ name: 'Settings' })">
         <v-icon>
-          mdi-home-heart
+          mdi-account-multiple
         </v-icon>
-        Семья
       </v-btn>
     </v-bottom-navigation>
   </v-layout>

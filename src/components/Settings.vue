@@ -1,47 +1,35 @@
 <template>
-  <v-card class="main-card">
-    <h1>Семья</h1>
-    <div v-if="invite">
-      Введите код приглашение
-      <v-text-field v-model="fieldInput"></v-text-field>
-      <v-btn @click="postUser">Подтвердить</v-btn>
-    </div>
-    <div v-else>
-      Ваш код приглашения
-      <v-text-field
-      v-model="UnicKey"
-      disabled>
-      </v-text-field>
-    </div>
-    <v-btn
-    @click="toggleInvite">{{ invite ? 'У меня есть код' : 'У меня нет кода' }}</v-btn>
-    <Navigation/>
-  </v-card>
+<v-card class="main-card">
+  <Invite v-if="view"/>
+  <div class="profile" v-else>
+    <h1>Профиль</h1>
+    <div class="round-for-photo"></div>
+    <p>userName</p>
+    <v-card class="w-66 h-55">
+      <p>Баллый</p>
+      <p>Идей</p>
+    </v-card>
+    <v-btn :to="({ name: 'Shop' })">Магазин</v-btn>
+    <v-btn :to="({ name: 'Family' })">Семья</v-btn>
+
+  </div>
+  <v-btn
+  @click="toggle">{{ view ? 'Настройки' : 'Вернуться к профилю' }}</v-btn>
+</v-card>
+<Navigation/>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import Navigation from "/src/components/Navigation.vue"
-import axios from "axios";
+import Invite from "./Invite.vue"
+import Navigation from "./Navigation.vue"
+import {ref} from 'vue'
 
-const fieldInput = ref();
-const invite = ref(true);
-const UnicKey = 1234;
+const view = ref(false);
 
-const toggleInvite = () => {
-      invite.value = !invite.value;
+const toogle = () => {
+  view.value = !view.value
 }
 
-const postUser = async () => {
-  try {
-    const response = await axios.post('/your-api-endpoint', {
-      data: fieldInput.value
-    });
-    console.log('Ответ сервера:', response.data);
-  } catch (error) {
-    console.error('Ошибка при отправке данных:', error);
-  }
-}
 </script>
 
 <style scoped>
@@ -49,5 +37,19 @@ const postUser = async () => {
   height: 89vh;
   margin: 1vh;
   border-radius: 5vh;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.round-for-photo {
+  width: 20vh;
+  height:20vh;
+  background-color: gray;
+  border-radius: 50%;
 }
 </style>
