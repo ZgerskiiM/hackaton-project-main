@@ -15,8 +15,15 @@
   import Axios from "axios";
 
   const postUser = async () => {
-    axios.post(fieldInput.value)
+  try {
+    const response = await axios.post('/your-api-endpoint', {
+      data: fieldInput.value
+    });
+    console.log('Ответ сервера:', response.data);
+  } catch (error) {
+    console.error('Ошибка при отправке данных:', error);
   }
+}
   </script>
 
   <style scoped>
